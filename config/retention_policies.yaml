@@ -1,0 +1,32 @@
+# Data Retention Policies - GDPR-compliant configuration
+# Define retention rules for different data categories
+
+retention_policies:
+  - policy_name: "delete_old_user_logs"
+    table_name: "user_activity_logs"
+    retention_days: 90
+    date_column: "created_at"
+    enabled: true
+    description: "Delete user activity logs older than 90 days"
+
+  - policy_name: "delete_expired_sessions"
+    table_name: "user_sessions"
+    retention_days: 30
+    date_column: "last_accessed_at"
+    enabled: true
+    description: "Delete expired user sessions older than 30 days"
+
+  - policy_name: "delete_temp_uploads"
+    table_name: "temporary_uploads"
+    retention_days: 7
+    date_column: "uploaded_at"
+    enabled: true
+    description: "Delete temporary upload data older than 7 days"
+
+  - policy_name: "delete_audit_logs_old"
+    table_name: "audit_logs"
+    retention_days: 365
+    date_column: "timestamp"
+    enabled: true
+    filter_conditions: "log_level = 'DEBUG'"
+    description: "Delete old DEBUG level audit logs after 1 year"
